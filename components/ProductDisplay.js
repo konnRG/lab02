@@ -26,6 +26,8 @@ app.component('product-display',{
                     <button class="button" :disabled='!inStock' :class="{disabledButton: !inStock}" @click="removeCart">Remove Cart</button>
                 </div>
             </div>
+            <review-list v-if="reviews.length">:reviews="reviews"<review-list>
+            <review-form @review-submited="addReview"></review-form>
         </div>`,
     data(){
         return {
@@ -40,6 +42,7 @@ app.component('product-display',{
             ],
             activeClass: true,
             selectedVariant: 0,
+            reviews:[]
 
         }
     },
@@ -55,6 +58,9 @@ app.component('product-display',{
         },
         removeCart() {
             this.$emit('remove-cart', this.variants[this.selectedVariant].id)
+        },
+        addReview(review){
+            this.reviews.push(review)
         }
     },
     computed: {
