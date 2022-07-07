@@ -23,10 +23,10 @@ app.component('product-display',{
                     <product-details :details="details"></product-details>
                     <div v-for="(variant,index) in variants" :key="variant.id" @mouseover="updateVariant(index)" class="color-circle" :style="{backgroundColor: variant.color}"></div>
                     <button class="button" :disabled='!inStock' :class="{disabledButton: !inStock}" @click="addToCart ">Add to Cart</button>
+                    <button class="button" :disabled='!inStock' :class="{disabledButton: !inStock}" @click="removeCart">Remove Cart</button>
                 </div>
             </div>
-        </div>
-    </div>`,
+        </div>`,
     data(){
         return {
             product: 'Shoes',
@@ -36,7 +36,7 @@ app.component('product-display',{
             details: ['50% cotton', '30% wool', '20% polyester'],
             variants: [
                 { id: 2234, color: 'green', image: './assets/images/socks_green.jpg', quantity: 50 },
-                { id: 2235, color: 'blue', image: './assets/images/socks_blue.jpg', quantity: 0}
+                { id: 2235, color: 'blue', image: './assets/images/socks_blue.jpg', quantity: 50}
             ],
             activeClass: true,
             selectedVariant: 0,
@@ -45,13 +45,16 @@ app.component('product-display',{
     },
     methods: {
         addToCart() {
-            this.cart += 1
+            this.$emit('add-to-cart', this.variants[this.selectedVariant].id)
         },
         updateImage(variantImage) {
             this.image = variantImage
         },
         updateVariant(index){
             this.selectedVariant = index;
+        },
+        removeCart() {
+            this.$emit('remove-cart', this.variants[this.selectedVariant].id)
         }
     },
     computed: {
