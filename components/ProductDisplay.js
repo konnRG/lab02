@@ -26,8 +26,8 @@ app.component('product-display',{
                     <button class="button" :disabled='!inStock' :class="{disabledButton: !inStock}" @click="removeCart">Remove Cart</button>
                 </div>
             </div>
-            <review-list v-if="reviews.length">:reviews="reviews"<review-list>
-            <review-form @review-submited="addReview"></review-form>
+            <review-list v-if="reviews.length" :reviews="reviews"></review-list>
+            <review-form @review-submitted="addReview"></review-form>
         </div>`,
     data(){
         return {

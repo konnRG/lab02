@@ -1,4 +1,4 @@
-app.component('reveiew-list',{
+app.component('review-list',{
     props: {
         reviews: {
             type: Array,
@@ -15,6 +15,9 @@ app.component('reveiew-list',{
             <br/>
             "{{ review.review }}"
             <br/>
+            Would {{ review.name }} recommend this product?
+            <br/>
+            = {{ review.question }}.
         </li>
     </ul>
     </div>`
